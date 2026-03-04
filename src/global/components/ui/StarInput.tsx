@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 interface Props {
   value: number;
   max?: number;
-  onChange: () => void;
+  onChange: (val: number) => void;
 }
 
 const StarInput = ({ value, max = 5, onChange }: Props) => {
@@ -27,7 +27,7 @@ const StarInput = ({ value, max = 5, onChange }: Props) => {
           role="radio"
           aria-checked={value === star}
           aria-label={`${star} star${star > 1 ? "s" : ""}`}
-          onClick={() => onChange()}
+          onClick={() => onChange(star)}
           onMouseEnter={() => setHovered(star)}
           onMouseLeave={() => setHovered(0)}
           className="focus:outline-none transition-transform hover:scale-110"

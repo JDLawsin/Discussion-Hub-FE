@@ -19,3 +19,7 @@ export type AuthenticatedUser = {
 export type ApiResponse<T> = {
   data: T;
 };
+
+export type SuccessApiResponse = {
+  success: boolean;
+};

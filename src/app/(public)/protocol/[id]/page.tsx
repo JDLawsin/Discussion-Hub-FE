@@ -1,4 +1,7 @@
-import { getProtocolById } from "@/features/protocol/services/protocol";
+import {
+  checkIfUserHasReviewed,
+  getProtocolById,
+} from "@/features/protocol/services/protocol";
 import ViewProtocolContainer from "@/features/protocol/components/ViewProtocolContainer";
 
 interface Props {
@@ -7,11 +10,14 @@ interface Props {
 
 const ViewProtocolPage = async ({ params }: Props) => {
   const { id } = await params;
-  const protocol = await getProtocolById(id);
+  const [protocol, hasReviewed] = await Promise.all([
+    await getProtocolById(id),
+    await checkIfUserHasReviewed(id),
+  ]);
 
   return (
     <div className="page-container">
-      <ViewProtocolContainer data={protocol} />
+      <ViewProtocolContainer data={protocol} hasReviewed={hasReviewed} />
     </div>
   );
 };

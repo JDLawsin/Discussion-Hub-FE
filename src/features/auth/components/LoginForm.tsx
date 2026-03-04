@@ -44,7 +44,7 @@ const LoginForm = () => {
       if (isAxiosError(error) && error.response) {
         setErrors(error.response.data.errors || null);
       } else {
-        toast.error("Login failed. Something went wrong.");
+        toast.error("Login failed. Something went wrong. Please try again!");
       }
       return `Form submission failed! ${JSON.stringify(error)}`;
     }

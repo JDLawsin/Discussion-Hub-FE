@@ -10,9 +10,10 @@ import ReviewSection from "@/features/review/components/ReviewSection";
 
 interface Props {
   data: Protocol;
+  hasReviewed: boolean;
 }
 
-const ViewProtocolContainer = ({ data }: Props) => {
+const ViewProtocolContainer = ({ data, hasReviewed }: Props) => {
   const searchParams = useSearchParams();
   const updateQueryString = useUpdateQueryString();
 
@@ -37,7 +38,9 @@ const ViewProtocolContainer = ({ data }: Props) => {
         reviewsCount={data.reviewCount}
       />
       {activeSection === "threads" && <ThreadSection />}
-      {activeSection === "reviews" && <ReviewSection />}
+      {activeSection === "reviews" && (
+        <ReviewSection hasReviewed={hasReviewed} />
+      )}
     </div>
   );
 };

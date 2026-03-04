@@ -12,7 +12,11 @@ import ReviewSkeleton from "./ReviewSkeleton";
 import RatingSummarySkeleton from "./RatingSummarySkeleton";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 
-const ReviewSection = () => {
+interface Props {
+  hasReviewed: boolean;
+}
+
+const ReviewSection = ({ hasReviewed }: Props) => {
   const [on, toggle] = useToggle(false);
   const { id } = useParams();
   const { reviews, isLoading, isLoadingMore, error, hasMore, loadMore } =
@@ -58,10 +62,10 @@ const ReviewSection = () => {
           <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
           {"Reviews"}
         </h2>
-        {isAuthenticated && (
+        {isAuthenticated && !hasReviewed && (
           <button
             onClick={() => toggle()}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
+            className="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
           >
             {!on ? (
               <Plus className="w-3.5 h-3.5" />
@@ -71,9 +75,15 @@ const ReviewSection = () => {
             {!on ? "Write Review" : "Hide Review"}
           </button>
         )}
+
+        {isAuthenticated && hasReviewed && (
+          <span className="text-xs font-bold text-orange-500">
+            {"You have already reviewed!"}
+          </span>
+        )}
       </div>
 
-      {on && <ReviewForm />}
+      {on && <ReviewForm onToggle={() => toggle()} />}
 
       <div className="bg-white border border-gray-200 rounded-xl p-4">
         <RatingSummary reviews={reviews} />

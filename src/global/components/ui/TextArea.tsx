@@ -1,17 +1,16 @@
 import clsx from "clsx";
 
 interface Props {
-  value: string;
+  name: string;
   error?: string[];
-  onChange: (value: string) => void;
   className?: string;
 }
 
-const FeedbackTextarea = ({ value, error, onChange, className }: Props) => (
+const FeedbackTextarea = ({ name, error, className }: Props) => (
   <div className="flex flex-col gap-1">
     <textarea
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
+      id={name}
+      name={name}
       placeholder="Share your thoughts (optional)..."
       rows={3}
       className={clsx(

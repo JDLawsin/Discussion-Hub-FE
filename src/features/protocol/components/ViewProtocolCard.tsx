@@ -1,6 +1,4 @@
-import { useToggle } from "@reactuses/core";
 import { Protocol } from "../types/types";
-import ReviewForm from "./ReviewForm";
 import { BookOpen, Clock, MessageSquare, Star } from "lucide-react";
 import Badge from "@/global/components/ui/Badge";
 import { timeAgo } from "@/global/libs/dates";
@@ -13,8 +11,6 @@ interface Props {
 }
 
 const ViewProtocolCard = ({ data }: Props) => {
-  const [on, toggle] = useToggle(false);
-
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
       <div className="h-1 bg-linear-to-r from-orange-400 to-orange-500" />
@@ -76,12 +72,6 @@ const ViewProtocolCard = ({ data }: Props) => {
           </div>
         </div>
       </div>
-
-      {on && (
-        <div className="px-6 pb-6">
-          <ReviewForm />
-        </div>
-      )}
     </div>
   );
 };
