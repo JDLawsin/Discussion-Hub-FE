@@ -51,9 +51,11 @@ const ThreadSection = () => {
       <CreateThreadAndSorter />
       {hasData ? (
         <>
-          {threads.map((thread) => (
-            <ThreadItem key={thread.id} thread={thread} />
-          ))}
+          <div className="flex flex-col gap-2">
+            {threads.map((thread) => (
+              <ThreadItem key={thread.id} thread={thread} />
+            ))}
+          </div>
           <LoadMoreButton
             onClick={handleLoadMoreThreads}
             loading={isLoadingMore}

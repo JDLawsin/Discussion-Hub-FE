@@ -1,3 +1,4 @@
+import { Protocol } from "@/features/protocol/types/types";
 import { Nullable } from "@/global/types";
 
 export type ThreadSort = "recent" | "upvoted";
@@ -12,6 +13,8 @@ export interface ThreadTag {
 
 export interface Thread {
   id: number;
+  protocolId: number;
+  protocol: Pick<Protocol, "title">;
   title: string;
   body: string;
   author: ThreadAuthor;
