@@ -1,3 +1,5 @@
+"use client";
+
 import ReviewForm from "@/features/protocol/components/ReviewForm";
 import { useToggle } from "@reactuses/core";
 import { Minus, Plus, Star } from "lucide-react";
@@ -8,12 +10,14 @@ import { useParams } from "next/navigation";
 import ReviewCard from "./ReviewCard";
 import ReviewSkeleton from "./ReviewSkeleton";
 import RatingSummarySkeleton from "./RatingSummarySkeleton";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 const ReviewSection = () => {
   const [on, toggle] = useToggle(false);
   const { id } = useParams();
   const { reviews, isLoading, isLoadingMore, error, hasMore, loadMore } =
     useReviews(id);
+  const { isAuthenticated } = useAuth();
 
   const handleLoadMoreReviews = () => loadMore();
 
@@ -39,9 +43,7 @@ const ReviewSection = () => {
           <div className="w-20 h-4 bg-gray-200 rounded-full" />
           <div className="w-28 h-7 bg-gray-200 rounded-full" />
         </div>
-
         <RatingSummarySkeleton />
-
         {Array.from({ length: 4 }).map((_, i) => (
           <ReviewSkeleton key={i} />
         ))}
@@ -56,17 +58,19 @@ const ReviewSection = () => {
           <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
           {"Reviews"}
         </h2>
-        <button
-          onClick={() => toggle()}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
-        >
-          {!on ? (
-            <Plus className="w-3.5 h-3.5" />
-          ) : (
-            <Minus className="w-3.5 h-3.5" />
-          )}
-          {!on ? "Write Review" : "Hide Review"}
-        </button>
+        {isAuthenticated && (
+          <button
+            onClick={() => toggle()}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
+          >
+            {!on ? (
+              <Plus className="w-3.5 h-3.5" />
+            ) : (
+              <Minus className="w-3.5 h-3.5" />
+            )}
+            {!on ? "Write Review" : "Hide Review"}
+          </button>
+        )}
       </div>
 
       {on && <ReviewForm />}

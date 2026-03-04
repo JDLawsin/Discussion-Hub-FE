@@ -22,6 +22,8 @@ export const setAuthCookies = async (token: string, user: User) => {
     maxAge: 60 * 60 * 24 * 30,
     path: "/",
   });
+
+  cookieStore.set("isAuthenticated", "true", { httpOnly: false });
 };
 
 export const logout = async () => {
@@ -45,5 +47,6 @@ export const logout = async () => {
   } finally {
     cookieStore.delete("apiToken");
     cookieStore.delete("authUser");
+    cookieStore.delete("isAuthenticated");
   }
 };

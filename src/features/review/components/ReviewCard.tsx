@@ -2,6 +2,8 @@ import StarDisplay from "@/global/components/ui/StarDisplay";
 import { timeAgo } from "@/global/libs/dates";
 import { getInitials } from "@/global/libs/utils";
 import { Review } from "../types/types";
+import Avatar from "@/global/components/ui/Avatar";
+import clsx from "clsx";
 
 interface Props {
   review: Review;
@@ -10,10 +12,13 @@ interface Props {
 const ReviewCard = ({ review }: Props) => (
   <div className="bg-white border border-gray-100 rounded-xl p-4 hover:border-gray-200 transition-colors">
     <div className="flex items-start gap-3">
-      <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-xs font-bold shrink-0">
-        {getInitials(review.author.name)}
-      </div>
-      <div className="flex-1 min-w-0">
+      <Avatar
+        name={review.author.name}
+        classname="text-orange-600! bg-orange-100!"
+      />
+      <div
+        className={clsx("flex-1 min-w-0", !review.feedback && "self-center")}
+      >
         <div className="flex items-center justify-between mb-1">
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-gray-800">

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, Compass, PlusCircle, LogOut } from "lucide-react";
+import { Menu, X, Compass, PlusCircle, LogOut, LogIn } from "lucide-react";
 import { logout } from "@/features/auth/actions/actions";
 import { toast } from "react-toastify";
 import Avatar from "../ui/Avatar";
@@ -34,6 +34,7 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = allLinks.filter((link) => !link.protected || isAuthenticated);
+  const isHomePage = pathname === "/";
 
   const handleLogout = async () => {
     try {
@@ -115,12 +116,23 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
                 </button>
               </>
             ) : (
-              <Link
-                href="/register"
-                className="px-3 py-1.5 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-md transition-colors"
-              >
-                {"Sign up"}
-              </Link>
+              <div className="flex items-center gap-2">
+                {!isHomePage && !isAuthenticated && (
+                  <Link
+                    href="/"
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-orange-500 border border-orange-200 hover:bg-orange-50 rounded-md transition-colors"
+                  >
+                    <LogIn className="w-4 h-4" />
+                    {"Log in"}
+                  </Link>
+                )}
+                <Link
+                  href="/register"
+                  className="px-3 py-1.5 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-md transition-colors"
+                >
+                  {"Sign up"}
+                </Link>
+              </div>
             )}
           </div>
 
@@ -188,13 +200,25 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
                   </button>
                 </>
               ) : (
-                <Link
-                  href="/register"
-                  onClick={() => setMenuOpen(false)}
-                  className="px-3 py-2 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-md transition-colors text-center"
-                >
-                  {"Sign up"}
-                </Link>
+                <div className="flex flex-col gap-1">
+                  {!isHomePage && !isAuthenticated && (
+                    <Link
+                      href="/"
+                      onClick={() => setMenuOpen(false)}
+                      className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-orange-500 border border-orange-200 hover:bg-orange-50 rounded-md transition-colors"
+                    >
+                      <LogIn className="w-4 h-4" />
+                      {"Log in"}
+                    </Link>
+                  )}
+                  <Link
+                    href="/register"
+                    onClick={() => setMenuOpen(false)}
+                    className="px-3 py-2 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-md transition-colors text-center"
+                  >
+                    {"Sign up"}
+                  </Link>
+                </div>
               )}
             </div>
           </div>

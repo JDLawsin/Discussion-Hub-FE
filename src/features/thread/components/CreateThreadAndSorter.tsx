@@ -1,13 +1,17 @@
+"use client";
+
 import { Clock, FileText, Plus, TrendingUp } from "lucide-react";
 import { ThreadSort } from "../../protocol/types/types";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import useUpdateQueryString from "@/global/hooks/useQueryString";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 const CreateThreadAndSorter = () => {
   const searchParams = useSearchParams();
   const { id } = useParams();
   const router = useRouter();
   const updateQueryString = useUpdateQueryString();
+  const { isAuthenticated } = useAuth();
   const threadSort = (searchParams.get("sort") || "recent") as ThreadSort;
 
   const handleThreadSortChange = (sort: ThreadSort) => {
@@ -41,13 +45,15 @@ const CreateThreadAndSorter = () => {
             </button>
           ))}
         </div>
-        <button
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs cursor-pointer font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
-          onClick={() => router.push(`/protocol/${id}/threads/create`)}
-        >
-          <Plus className="w-3.5 h-3.5" />
-          {"New Thread"}
-        </button>
+        {isAuthenticated && (
+          <button
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs cursor-pointer font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
+            onClick={() => router.push(`/protocol/${id}/threads/create`)}
+          >
+            <Plus className="w-3.5 h-3.5" />
+            {"New Thread"}
+          </button>
+        )}
       </div>
     </div>
   );
