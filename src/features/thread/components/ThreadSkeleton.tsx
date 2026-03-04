@@ -1,12 +1,6 @@
 const ThreadSkeleton = () => (
   <div className="bg-white border border-gray-200 rounded-xl overflow-hidden animate-pulse">
     <div className="flex">
-      <div className="flex flex-col items-center gap-2 px-3 py-4 bg-gray-50 border-r border-gray-100 min-w-12">
-        <div className="w-5 h-5 bg-gray-200 rounded" />
-        <div className="w-4 h-3 bg-gray-200 rounded" />
-        <div className="w-5 h-5 bg-gray-200 rounded" />
-      </div>
-
       <div className="flex-1 p-4 space-y-3">
         <div className="flex items-center gap-2">
           <div className="w-16 h-3 bg-gray-200 rounded-full" />

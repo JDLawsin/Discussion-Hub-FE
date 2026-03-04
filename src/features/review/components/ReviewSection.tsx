@@ -1,9 +1,53 @@
 import ReviewForm from "@/features/protocol/components/ReviewForm";
 import { useToggle } from "@reactuses/core";
 import { Minus, Plus, Star } from "lucide-react";
+import RatingSummary from "./RatingSummary";
+import LoadMoreButton from "@/global/components/ui/LoadMoreButton";
+import useReviews from "../hooks/useReviews";
+import { useParams } from "next/navigation";
+import ReviewCard from "./ReviewCard";
+import ReviewSkeleton from "./ReviewSkeleton";
+import RatingSummarySkeleton from "./RatingSummarySkeleton";
 
 const ReviewSection = () => {
   const [on, toggle] = useToggle(false);
+  const { id } = useParams();
+  const { reviews, isLoading, isLoadingMore, error, hasMore, loadMore } =
+    useReviews(id);
+
+  const handleLoadMoreReviews = () => loadMore();
+
+  if (error) {
+    return (
+      <div className="space-y-3">
+        <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+          <p className="text-sm font-medium text-red-600 mb-1">
+            {"Failed to load reviews"}
+          </p>
+          <p className="text-xs text-red-400">
+            {"Please try refreshing the page"}
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="space-y-3">
+        <div className="flex items-center justify-between animate-pulse">
+          <div className="w-20 h-4 bg-gray-200 rounded-full" />
+          <div className="w-28 h-7 bg-gray-200 rounded-full" />
+        </div>
+
+        <RatingSummarySkeleton />
+
+        {Array.from({ length: 4 }).map((_, i) => (
+          <ReviewSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-3">
@@ -26,6 +70,22 @@ const ReviewSection = () => {
       </div>
 
       {on && <ReviewForm />}
+
+      <div className="bg-white border border-gray-200 rounded-xl p-4">
+        <RatingSummary reviews={reviews} />
+      </div>
+
+      <div className="space-y-2">
+        {reviews.map((review) => (
+          <ReviewCard key={review.id} review={review} />
+        ))}
+        <LoadMoreButton
+          onClick={handleLoadMoreReviews}
+          loading={isLoadingMore}
+          hasMore={hasMore}
+          label="Reviews"
+        />
+      </div>
     </div>
   );
 };
