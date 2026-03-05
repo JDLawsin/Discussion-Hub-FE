@@ -7,12 +7,15 @@ import { ErrorState } from "@/global/types";
 import { useParams } from "next/navigation";
 import { FormEvent, useActionState, useState } from "react";
 import { toast } from "react-toastify";
+import { CommentFormObject } from "../schema";
+import { submitComment } from "../actions/actions";
 
 interface Props {
   onToggle: () => void;
+  mutate: () => void;
 }
 
-const CommentForm = ({ onToggle }: Props) => {
+const CommentForm = ({ onToggle, mutate }: Props) => {
   const { isAuthenticated } = useAuth();
   const { id } = useParams();
   const [errors, setErrors] = useState<ErrorState<{ comment: "" }> | null>(
@@ -22,6 +25,14 @@ const CommentForm = ({ onToggle }: Props) => {
   const handleFormSubmit = async (_: string, formData: FormData) => {
     try {
       setErrors(null);
+
+      const res = await submitComment(id, formData);
+
+      if (res && res.success) {
+        mutate();
+        toast.success("Commented Successfully");
+        onToggle();
+      }
 
       return "Form submitted successfully!";
     } catch (error) {
@@ -36,12 +47,12 @@ const CommentForm = ({ onToggle }: Props) => {
   const validateForm = (event: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
     const formDataEntries = Object.fromEntries(formData.entries());
-    // const result = {}.safeParse(formDataEntries);
+    const result = CommentFormObject.safeParse(formDataEntries);
 
-    // if (result.error) {
-    //   event.preventDefault();
-    //   setErrors(result.error.flatten().fieldErrors);
-    // }
+    if (result.error) {
+      event.preventDefault();
+      setErrors(result.error.flatten().fieldErrors);
+    }
   };
 
   if (!isAuthenticated) return null;
@@ -51,7 +62,7 @@ const CommentForm = ({ onToggle }: Props) => {
       <form action={formAction} onSubmit={validateForm}>
         <FeedbackTextarea
           placeholder={"What are your thoughts?"}
-          name="feedback"
+          name="comment"
           error={errors?.comment}
         />
         <div className="flex justify-end mt-2">

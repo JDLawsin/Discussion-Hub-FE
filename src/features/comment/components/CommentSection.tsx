@@ -9,9 +9,12 @@ import CommentSkeleton from "./CommentSkeleton";
 import EmptyComment from "./EmptyComment";
 import CommentItem from "./CommentItem";
 import LoadMoreButton from "@/global/components/ui/LoadMoreButton";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { MAX_COMMENT_DEPTH } from "@/global/libs/constants";
 
 const CommentSection = () => {
   const [on, toggle] = useToggle(false);
+  const { isAuthenticated } = useAuth();
   const { id } = useParams();
   const {
     comments,
@@ -22,41 +25,6 @@ const CommentSection = () => {
     loadMore,
     mutate,
   } = useComments({ threadId: id });
-
-  const handleCommentSubmit = async (body: string) => {
-    try {
-      //   await fetch(`${process.env.NEXT_PUBLIC_API_URL}/threads/${id}/comments`, {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Accept: "application/json",
-      //     },
-      //     credentials: "include",
-      //     body: JSON.stringify({ body }),
-      //   });
-      mutate(); // refresh comments
-      toggle(); // hide form
-    } catch (error) {
-      console.error("Failed to post comment:", error);
-    }
-  };
-
-  const handleReply = async (parentId: number, body: string) => {
-    try {
-      // await fetch(`${process.env.NEXT_PUBLIC_API_URL}/threads/${id}/comments`, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Accept: "application/json",
-      //   },
-      //   credentials: "include",
-      //   body: JSON.stringify({ body, parent_id: parentId }),
-      // });
-      mutate(); // refresh comments
-    } catch (error) {
-      console.error("Failed to post reply:", error);
-    }
-  };
 
   if (error) {
     return (
@@ -83,20 +51,22 @@ const CommentSection = () => {
             </span>
           )}
         </h2>
-        <button
-          onClick={() => toggle()}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
-        >
-          {on ? (
-            <Minus className="w-3.5 h-3.5" />
-          ) : (
-            <Plus className="w-3.5 h-3.5" />
-          )}
-          {on ? "Hide" : "Add Comment"}
-        </button>
+        {isAuthenticated && (
+          <button
+            onClick={() => toggle()}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
+          >
+            {on ? (
+              <Minus className="w-3.5 h-3.5" />
+            ) : (
+              <Plus className="w-3.5 h-3.5" />
+            )}
+            {on ? "Hide" : "Add Comment"}
+          </button>
+        )}
       </div>
 
-      {on && <CommentForm onToggle={() => toggle()} />}
+      {on && <CommentForm mutate={() => mutate()} onToggle={() => toggle()} />}
 
       {isLoading ? (
         <div className="space-y-4">
@@ -113,7 +83,8 @@ const CommentSection = () => {
               key={comment.id}
               comment={comment}
               depth={0}
-              onReply={handleReply}
+              maxDepth={MAX_COMMENT_DEPTH}
+              mutate={() => mutate()}
             />
           ))}
           <LoadMoreButton

@@ -5,12 +5,16 @@ import { ErrorState } from "@/global/types";
 import { useParams } from "next/navigation";
 import { FormEvent, useActionState, useState } from "react";
 import { toast } from "react-toastify";
+import { submitComment } from "../actions/actions";
+import { CommentFormObject } from "../schema";
 
 interface Props {
   onToggle: () => void;
+  mutate: () => void;
+  commentParentId: number;
 }
 
-const ReplyForm = ({ onToggle }: Props) => {
+const ReplyForm = ({ onToggle, mutate, commentParentId }: Props) => {
   const { isAuthenticated } = useAuth();
   const { id } = useParams();
   const [errors, setErrors] = useState<ErrorState<{ comment: "" }> | null>(
@@ -20,6 +24,14 @@ const ReplyForm = ({ onToggle }: Props) => {
   const handleFormSubmit = async (_: string, formData: FormData) => {
     try {
       setErrors(null);
+
+      const res = await submitComment(id, formData, commentParentId);
+
+      if (res && res.success) {
+        mutate();
+        toast.success("Replied Successfully");
+        onToggle();
+      }
 
       return "Form submitted successfully!";
     } catch (error) {
@@ -34,12 +46,12 @@ const ReplyForm = ({ onToggle }: Props) => {
   const validateForm = (event: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
     const formDataEntries = Object.fromEntries(formData.entries());
-    // const result = {}.safeParse(formDataEntries);
+    const result = CommentFormObject.safeParse(formDataEntries);
 
-    // if (result.error) {
-    //   event.preventDefault();
-    //   setErrors(result.error.flatten().fieldErrors);
-    // }
+    if (result.error) {
+      event.preventDefault();
+      setErrors(result.error.flatten().fieldErrors);
+    }
   };
 
   if (!isAuthenticated) return null;
@@ -51,7 +63,7 @@ const ReplyForm = ({ onToggle }: Props) => {
       <form action={formAction} onSubmit={validateForm}>
         <FeedbackTextarea
           placeholder="Write a reply..."
-          name="feedback"
+          name="comment"
           error={errors?.comment}
         />
         <div className="flex gap-2 justify-end mt-2">

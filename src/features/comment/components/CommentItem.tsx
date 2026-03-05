@@ -14,16 +14,18 @@ import {
 } from "lucide-react";
 import ReplyForm from "./ReplyForm";
 import { useToggle } from "@reactuses/core";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 interface Props {
   comment: Comment;
   depth?: number;
   maxDepth?: number;
-  onReply?: (parentId: number, body: string) => void;
+  mutate: () => void;
 }
 
-const CommentItem = ({ comment, depth = 0, maxDepth, onReply }: Props) => {
+const CommentItem = ({ comment, depth = 0, maxDepth, mutate }: Props) => {
   const [on, toggle] = useToggle(false);
+  const { isAuthenticated } = useAuth();
   const [showReplies, setShowReplies] = useState(true);
 
   const { voteType, upvoteCount, downvoteCount, isVoting, vote } = useVote({
@@ -38,11 +40,6 @@ const CommentItem = ({ comment, depth = 0, maxDepth, onReply }: Props) => {
 
   const canReply = maxDepth === undefined ? true : depth < maxDepth;
   const canRenderReplies = maxDepth === undefined ? true : depth < maxDepth;
-
-  const handleReplySubmit = (body: string) => {
-    onReply?.(comment.id, body);
-    toggle();
-  };
 
   return (
     <div
@@ -70,7 +67,7 @@ const CommentItem = ({ comment, depth = 0, maxDepth, onReply }: Props) => {
             <div className="flex items-center gap-1">
               <button
                 onClick={() => vote("upvote")}
-                disabled={isVoting}
+                disabled={isVoting || !isAuthenticated}
                 className={`flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-xs font-medium transition-colors ${
                   voteType === "upvote"
                     ? "bg-orange-100 text-orange-600"
@@ -83,7 +80,7 @@ const CommentItem = ({ comment, depth = 0, maxDepth, onReply }: Props) => {
 
               <button
                 onClick={() => vote("downvote")}
-                disabled={isVoting}
+                disabled={isVoting || !isAuthenticated}
                 className={`flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-xs font-medium transition-colors ${
                   voteType === "downvote"
                     ? "bg-blue-100 text-blue-600"
@@ -94,7 +91,7 @@ const CommentItem = ({ comment, depth = 0, maxDepth, onReply }: Props) => {
                 {downvoteCount}
               </button>
 
-              {canReply && (
+              {canReply && isAuthenticated && (
                 <button
                   onClick={() => toggle()}
                   className="flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium text-gray-400 hover:text-orange-500 hover:bg-orange-50 transition-colors"
@@ -117,7 +114,13 @@ const CommentItem = ({ comment, depth = 0, maxDepth, onReply }: Props) => {
               )}
             </div>
 
-            {on && <ReplyForm onToggle={() => toggle()} />}
+            {on && (
+              <ReplyForm
+                commentParentId={comment.id}
+                onToggle={() => toggle()}
+                mutate={mutate}
+              />
+            )}
           </div>
         </div>
 
@@ -129,7 +132,7 @@ const CommentItem = ({ comment, depth = 0, maxDepth, onReply }: Props) => {
                 comment={reply}
                 depth={depth + 1}
                 maxDepth={maxDepth}
-                onReply={onReply}
+                mutate={mutate}
               />
             ))}
           </div>
