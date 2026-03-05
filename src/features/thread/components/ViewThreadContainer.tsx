@@ -4,6 +4,7 @@ import { Thread } from "../types/types";
 import ViewThreadCard from "./ViewThreadCard";
 import { Nullable } from "@/global/types";
 import { VoteType } from "@/features/vote/hooks/useVote";
+import CommentSection from "@/features/comment/components/CommentSection";
 
 interface Props {
   thread: Thread;
@@ -25,6 +26,8 @@ const ViewThreadContainer = ({ thread, userVoteType }: Props) => {
       </Link>
 
       <ViewThreadCard thread={thread} userVoteType={userVoteType} />
+
+      <CommentSection />
     </>
   );
 };

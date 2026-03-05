@@ -73,13 +73,11 @@ const useVote = ({
     });
 
     try {
-      const res = await castVote({
+      await castVote({
         votableId,
         votableType,
         type,
       });
-
-      console.log(res);
     } catch (error) {
       setVoteState(prevState);
       toast.error("Voting Failed. Something went wrong. Please try again!");
