@@ -25,7 +25,7 @@ const useReviews = (id: ParamValue) => {
     return `${process.env.NEXT_PUBLIC_API_URL}/reviews/${id}?${searchParams.toString()}`;
   };
 
-  const { data, isLoading, error, size, setSize } =
+  const { data, isLoading, error, size, setSize, mutate } =
     useSWRInfinite<ReviewPaginatedResponse>(getKey, fetcher);
 
   const reviews: Review[] = data ? data.flatMap((page) => page.data) : [];
@@ -42,6 +42,7 @@ const useReviews = (id: ParamValue) => {
     hasMore,
     error,
     loadMore,
+    mutate,
   };
 };
 

@@ -19,8 +19,15 @@ interface Props {
 const ReviewSection = ({ hasReviewed }: Props) => {
   const [on, toggle] = useToggle(false);
   const { protocolId } = useParams();
-  const { reviews, isLoading, isLoadingMore, error, hasMore, loadMore } =
-    useReviews(protocolId);
+  const {
+    reviews,
+    isLoading,
+    isLoadingMore,
+    error,
+    hasMore,
+    loadMore,
+    mutate,
+  } = useReviews(protocolId);
   const { isAuthenticated } = useAuth();
 
   const handleLoadMoreReviews = () => loadMore();
@@ -91,7 +98,7 @@ const ReviewSection = ({ hasReviewed }: Props) => {
 
       <div className="space-y-2">
         {reviews.map((review) => (
-          <ReviewCard key={review.id} review={review} />
+          <ReviewCard key={review.id} review={review} mutate={() => mutate()} />
         ))}
         <LoadMoreButton
           onClick={handleLoadMoreReviews}

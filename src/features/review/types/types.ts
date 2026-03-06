@@ -3,6 +3,7 @@ import { Nullable } from "@/global/types";
 
 export interface ReviewAuthor {
   name: string;
+  id: number;
 }
 
 export interface ReviewTag {

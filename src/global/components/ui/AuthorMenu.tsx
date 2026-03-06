@@ -1,7 +1,7 @@
 "use client";
 
 import { useDisclosure } from "@reactuses/core";
-import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
+import { MoreHorizontal, MoreVertical, Pencil, Trash2 } from "lucide-react";
 import Link from "next/link";
 import ConfirmDialog from "./ConfirmDialog";
 
@@ -17,6 +17,7 @@ interface Props {
   deleteLabel?: string;
   onDelete: () => void;
   size?: "sm" | "md";
+  isIconHorizontal?: boolean;
 }
 
 const sizeStyles = {
@@ -44,6 +45,7 @@ const AuthorMenu = ({
   deleteLabel = "Delete",
   onDelete,
   size = "md",
+  isIconHorizontal = true,
 }: Props) => {
   const { isOpen: menuOpen, onOpen, onClose } = useDisclosure();
   // ← ConfirmDialog has its own independent disclosure state
@@ -65,7 +67,11 @@ const AuthorMenu = ({
         onClick={() => onOpen()}
         className={`${s.trigger} text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors`}
       >
-        <MoreHorizontal className={s.icon} />
+        {isIconHorizontal ? (
+          <MoreHorizontal className={s.icon} />
+        ) : (
+          <MoreVertical className={s.icon} />
+        )}
       </button>
 
       {menuOpen && (
