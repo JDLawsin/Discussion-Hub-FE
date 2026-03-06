@@ -3,17 +3,22 @@
 import { FormEvent, useActionState, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { BookOpen } from "lucide-react";
 import FormButton from "@/global/components/ui/FormButton";
 import { ErrorState } from "@/global/types";
 import TagInput from "@/global/components/ui/TagInput";
-import { CreateProtocolObject, CreateProtocolSchema } from "../schema";
-import { createProtocol } from "../actions/actions";
-import FormInput from "@/global/components/ui/FormInput";
 import FeedbackTextarea from "@/global/components/ui/TextArea";
+import FormInput from "@/global/components/ui/FormInput";
+import { CreateThreadObject, CreateThreadSchema } from "../schema";
+import { createThread } from "../actions/actions";
 
-const CreateProtocolForm = () => {
+interface Props {
+  protocolId: string;
+}
+
+const CreateThreadForm = ({ protocolId }: Props) => {
   const router = useRouter();
-  const [errors, setErrors] = useState<ErrorState<CreateProtocolSchema> | null>(
+  const [errors, setErrors] = useState<ErrorState<CreateThreadSchema> | null>(
     null,
   );
   const [tags, setTags] = useState<string[]>([]);
@@ -27,17 +32,18 @@ const CreateProtocolForm = () => {
       setErrors(null);
 
       formData.set("tags", tags.join(","));
+      formData.set("protocolId", protocolId);
 
-      const res = await createProtocol(formData);
+      const res = await createThread(formData);
 
       if (res && res.success) {
         toast.success("Created Successfully");
-        router.push(`/protocol/${res.id}`);
+        router.push(`/protocol/${protocolId}/thread/${res.id}`);
       }
 
       return "Form submitted successfully!";
     } catch (error) {
-      console.error("Create protocol failed:", error);
+      console.error("Create thread failed:", error);
       toast.error("Submission Failed. Something went wrong. Please try again!");
       return `Form submission failed! ${JSON.stringify(error)}`;
     }
@@ -46,7 +52,7 @@ const CreateProtocolForm = () => {
   const validateForm = (event: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
     const entries = Object.fromEntries(formData.entries());
-    const result = CreateProtocolObject.safeParse(entries);
+    const result = CreateThreadObject.safeParse(entries);
 
     if (!result.success) {
       event.preventDefault();
@@ -65,7 +71,7 @@ const CreateProtocolForm = () => {
           name="title"
           errors={errors?.title}
           required
-          placeholder="Give your protocol a clear, descriptive title..."
+          placeholder="What do you want to discuss?"
         />
       </div>
 
@@ -73,9 +79,9 @@ const CreateProtocolForm = () => {
         <FeedbackTextarea
           label="Content"
           required
-          placeholder="Describe your protocol in detail. What problem does it solve? How does it work? What are the best practices?"
-          name="content"
-          error={errors?.content}
+          placeholder="Share your thoughts, questions, or insights..."
+          name="body"
+          error={errors?.body}
           rows={8}
         />
       </div>
@@ -92,7 +98,7 @@ const CreateProtocolForm = () => {
         />
       </div>
 
-      <div className="flex items-center justify-end gap-3 pt-2 ">
+      <div className="flex items-center justify-end gap-3 pt-2">
         <button
           type="button"
           onClick={() => router.back()}
@@ -101,11 +107,11 @@ const CreateProtocolForm = () => {
           {"Cancel"}
         </button>
         <FormButton className="flex items-center gap-2 px-6 py-2 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors cursor-pointer">
-          {"Publish Protocol"}
+          {"Post Thread"}
         </FormButton>
       </div>
     </form>
   );
 };
 
-export default CreateProtocolForm;
+export default CreateThreadForm;

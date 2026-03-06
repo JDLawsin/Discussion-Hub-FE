@@ -49,7 +49,7 @@ const CreateThreadAndSorter = () => {
           <button
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs cursor-pointer font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
             onClick={() =>
-              router.push(`/protocol/${protocolId}/thread/create-thread`)
+              router.push(`/protocol/${protocolId}/thread/create`)
             }
           >
             <Plus className="w-3.5 h-3.5" />

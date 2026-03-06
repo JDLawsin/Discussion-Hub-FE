@@ -17,9 +17,7 @@ const EmptyThread = () => {
         {"Be the first to start a discussion!"}
       </p>
       <button
-        onClick={() =>
-          router.push(`/protocol/${protocolId}/thread/create-thread`)
-        }
+        onClick={() => router.push(`/protocol/${protocolId}/thread/create`)}
         className="flex items-center gap-1.5 px-4 py-2 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors mx-auto"
       >
         <Plus className="w-4 h-4" />
