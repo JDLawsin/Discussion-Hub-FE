@@ -1,3 +1,5 @@
+"use client";
+
 import { Protocol } from "../types/types";
 import { BookOpen, Clock, MessageSquare, Star } from "lucide-react";
 import Badge from "@/global/components/ui/Badge";
@@ -5,20 +7,56 @@ import { timeAgo } from "@/global/libs/dates";
 import StarRating from "@/global/components/ui/StarRating";
 import Avatar from "@/global/components/ui/Avatar";
 import Breadcrumb from "@/global/components/ui/Breadcrumb";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import AuthorMenu from "@/global/components/ui/AuthorMenu";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { deleteProtocol } from "../actions/actions";
 
 interface Props {
   data: Protocol;
 }
 
 const ViewProtocolCard = ({ data }: Props) => {
+  const { user } = useAuth();
+  const router = useRouter();
+  const isAuthor = user?.id === data.author.id;
+
+  const handleDelete = async () => {
+    try {
+      console.log(data.id);
+      await deleteProtocol(data.id);
+      router.push("/browse");
+    } catch {
+      toast.error("Failed to delete. Please try again.");
+    }
+  };
+
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
       <div className="h-1 bg-linear-to-r from-orange-400 to-orange-500" />
       <div className="p-6">
-        <Breadcrumb
-          items={[{ label: "Protocol", icon: BookOpen }, { label: data.title }]}
-          className="mb-4"
-        />
+        <div className="flex items-start justify-between mb-4">
+          <Breadcrumb
+            items={[
+              { label: "Protocol", icon: BookOpen },
+              { label: data.title },
+            ]}
+            className="mb-4"
+          />
+
+          {isAuthor && (
+            <AuthorMenu
+              size="sm"
+              editAction={{ type: "link", href: `/protocols/${data.id}/edit` }}
+              editLabel="Edit Protocol"
+              deleteTitle="Delete Protocol"
+              deleteDescription="This will permanently delete the protocol and all its threads. This action cannot be undone."
+              deleteLabel="Delete"
+              onDelete={handleDelete}
+            />
+          )}
+        </div>
 
         <h1 className="text-2xl font-extrabold text-gray-900 leading-tight mb-3">
           {data.title}

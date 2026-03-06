@@ -2,7 +2,7 @@ export type Protocol = {
   id: string;
   title: string;
   content: string;
-  author: { name: string };
+  author: { name: string; id: number };
   tags: { name: string }[];
   threadCount: number;
   reviewCount: number;

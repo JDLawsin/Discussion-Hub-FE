@@ -1,12 +1,32 @@
+import { User } from "@/global/types";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
-export const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+type AuthState = {
+  isAuthenticated: boolean;
+  user: User | null;
+};
+
+export const useAuth = (): AuthState => {
+  const [state, setState] = useState<AuthState>({
+    isAuthenticated: false,
+    user: null,
+  });
 
   useEffect(() => {
-    setIsAuthenticated(Cookies.get("isAuthenticated") === "true");
+    const isAuthenticated = Cookies.get("isAuthenticated") === "true";
+    const rawUser = Cookies.get("authUser");
+
+    const user: User | null = (() => {
+      try {
+        return rawUser ? (JSON.parse(rawUser) as User) : null;
+      } catch {
+        return null;
+      }
+    })();
+
+    setState({ isAuthenticated, user });
   }, []);
 
-  return { isAuthenticated };
+  return state;
 };
