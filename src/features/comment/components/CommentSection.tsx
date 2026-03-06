@@ -15,7 +15,7 @@ import { MAX_COMMENT_DEPTH } from "@/global/libs/constants";
 const CommentSection = () => {
   const [on, toggle] = useToggle(false);
   const { isAuthenticated } = useAuth();
-  const { id } = useParams();
+  const { threadId } = useParams();
   const {
     comments,
     isLoading,
@@ -24,7 +24,7 @@ const CommentSection = () => {
     hasMore,
     loadMore,
     mutate,
-  } = useComments({ threadId: id });
+  } = useComments({ threadId });
 
   if (error) {
     return (

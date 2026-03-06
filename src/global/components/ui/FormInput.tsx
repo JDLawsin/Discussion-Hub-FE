@@ -7,20 +7,31 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   errors?: string[];
 }
 
-const FormInput = ({ name, label, errors, className, ...props }: Props) => {
+const FormInput = ({
+  name,
+  label,
+  errors,
+  required,
+  className,
+  ...props
+}: Props) => {
   const hasErrors = errors && errors.length > 0;
 
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+      <label
+        htmlFor={name}
+        className="flex items-center text-sm font-medium text-gray-700 gap-1.5"
+      >
         {label}
+        {required && <span className="text-red-400">*</span>}
       </label>
 
       <input
         id={name}
         name={name}
         className={[
-          "rounded-md border px-3 py-2 text-sm shadow-sm outline-none transition-colors",
+          "rounded-md border px-3 py-2 text-sm outline-none transition-colors",
           "placeholder:text-gray-400",
           "focus:ring-2 focus:ring-offset-1",
           hasErrors

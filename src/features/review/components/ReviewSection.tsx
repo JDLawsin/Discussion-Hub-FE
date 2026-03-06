@@ -18,9 +18,9 @@ interface Props {
 
 const ReviewSection = ({ hasReviewed }: Props) => {
   const [on, toggle] = useToggle(false);
-  const { id } = useParams();
+  const { protocolId } = useParams();
   const { reviews, isLoading, isLoadingMore, error, hasMore, loadMore } =
-    useReviews(id);
+    useReviews(protocolId);
   const { isAuthenticated } = useAuth();
 
   const handleLoadMoreReviews = () => loadMore();

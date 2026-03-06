@@ -3,14 +3,14 @@ import { getThreadById } from "@/features/thread/services/thread";
 import { getUserVoteType } from "@/features/vote/services/vote";
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: Promise<{ threadId: string }>;
 }
 
 const ViewThreadPage = async ({ params }: Props) => {
-  const { id } = await params;
+  const { threadId } = await params;
   const [thread, voteType] = await Promise.all([
-    await getThreadById(id),
-    await getUserVoteType("thread", id),
+    await getThreadById(threadId),
+    await getUserVoteType("thread", threadId),
   ]);
 
   return (

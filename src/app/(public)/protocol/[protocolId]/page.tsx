@@ -5,14 +5,14 @@ import {
 import ViewProtocolContainer from "@/features/protocol/components/ViewProtocolContainer";
 
 interface Props {
-  params: Promise<{ id: string }>;
+  params: Promise<{ protocolId: string }>;
 }
 
 const ViewProtocolPage = async ({ params }: Props) => {
-  const { id } = await params;
+  const { protocolId } = await params;
   const [protocol, hasReviewed] = await Promise.all([
-    await getProtocolById(id),
-    await checkIfUserHasReviewed(id),
+    await getProtocolById(protocolId),
+    await checkIfUserHasReviewed(protocolId),
   ]);
 
   return (

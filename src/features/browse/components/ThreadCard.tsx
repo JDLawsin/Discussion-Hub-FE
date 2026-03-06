@@ -15,7 +15,7 @@ interface Props {
 }
 
 const ThreadCard = ({ hit }: Props) => (
-  <Link href={`/thread/${hit.id}`}>
+  <Link href={`protocol/${hit.protocol_id}/thread/${hit.id}`}>
     <div className="bg-white border border-gray-200 rounded-xl hover:border-orange-200 hover:shadow-md transition-all duration-200 cursor-pointer group">
       <div className="flex">
         <div className="flex-1 p-4">

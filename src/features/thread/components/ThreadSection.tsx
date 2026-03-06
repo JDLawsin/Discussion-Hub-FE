@@ -11,10 +11,10 @@ import ThreadSkeleton from "./ThreadSkeleton";
 
 const ThreadSection = () => {
   const searchParams = useSearchParams();
-  const { id } = useParams();
+  const { protocolId } = useParams();
   const threadSort = (searchParams.get("sort") || "recent") as ThreadSort;
   const { threads, isLoading, isLoadingMore, error, hasMore, loadMore } =
-    useThreads({ threadSort }, id);
+    useThreads({ threadSort }, protocolId);
   const hasData = threads.length > 0;
 
   const handleLoadMoreThreads = () => loadMore();

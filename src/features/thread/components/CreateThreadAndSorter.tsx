@@ -8,7 +8,7 @@ import { useAuth } from "@/features/auth/hooks/useAuth";
 
 const CreateThreadAndSorter = () => {
   const searchParams = useSearchParams();
-  const { id } = useParams();
+  const { protocolId } = useParams();
   const router = useRouter();
   const updateQueryString = useUpdateQueryString();
   const { isAuthenticated } = useAuth();
@@ -48,7 +48,9 @@ const CreateThreadAndSorter = () => {
         {isAuthenticated && (
           <button
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs cursor-pointer font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
-            onClick={() => router.push(`/protocol/${id}/threads/create`)}
+            onClick={() =>
+              router.push(`/protocol/${protocolId}/thread/create-thread`)
+            }
           >
             <Plus className="w-3.5 h-3.5" />
             {"New Thread"}

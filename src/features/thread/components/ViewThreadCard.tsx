@@ -89,8 +89,7 @@ const ViewThreadCard = ({ thread, userVoteType }: Props) => (
             </span>
             <span className="flex items-center gap-1">
               <MessageSquare className="w-3.5 h-3.5" />
-              {/* comment count from comments section */}
-              Discussion below
+              {"Discussion below"}
             </span>
           </div>
         </div>

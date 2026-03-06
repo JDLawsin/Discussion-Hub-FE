@@ -49,7 +49,7 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+        <div className="px-6 md:px-16 lg:px-24 h-14 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <div className="w-7 h-7 rounded-full bg-orange-500 flex items-center justify-center">

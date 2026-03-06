@@ -9,9 +9,13 @@ import {
 import { timeAgo } from "@/global/libs/dates";
 import Link from "next/link";
 
-const ThreadItem = ({ thread }: { thread: Thread }) => {
+interface Props {
+  thread: Thread;
+}
+
+const ThreadItem = ({ thread }: Props) => {
   return (
-    <Link href={`/thread/${thread.id}`}>
+    <Link href={`/protocol/${thread.protocolId}/thread/${thread.id}`}>
       <div className="bg-white border border-gray-200 rounded-xl hover:border-orange-200 hover:shadow-md transition-all duration-200 cursor-pointer group">
         <div className="flex">
           <div className="flex-1 p-4">
