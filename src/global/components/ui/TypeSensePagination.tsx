@@ -28,7 +28,7 @@ const TypeSensePagination = () => {
           onClick={() => refine(page)}
           className={`w-8 h-8 text-xs font-medium rounded-lg transition-colors ${
             currentRefinement === page
-              ? "bg-orange-500 text-white"
+              ? "bg-teal-500 text-white"
               : "text-gray-600 hover:bg-gray-100"
           }`}
         >

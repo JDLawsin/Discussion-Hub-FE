@@ -43,10 +43,10 @@ const CommentSection = () => {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <h2 className="text-sm font-bold text-gray-800 flex items-center gap-2">
-          <MessageSquare className="w-4 h-4 text-orange-400" />
+          <MessageSquare className="w-4 h-4 text-teal-400" />
           {"Comments"}
           {!isLoading && (
-            <span className="text-xs font-medium bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded-full">
+            <span className="text-xs font-medium bg-teal-100 text-teal-600 px-1.5 py-0.5 rounded-full">
               {comments.length}
             </span>
           )}
@@ -54,7 +54,7 @@ const CommentSection = () => {
         {isAuthenticated && (
           <button
             onClick={() => toggle()}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-teal-500 hover:bg-teal-600 rounded-full transition-colors"
           >
             {on ? (
               <Minus className="w-3.5 h-3.5" />

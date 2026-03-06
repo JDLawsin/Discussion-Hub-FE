@@ -42,7 +42,7 @@ const ViewThreadCard = ({ thread, userVoteType }: Props) => {
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-      <div className="h-1 bg-linear-to-r from-orange-400 to-orange-500" />
+      <div className="h-1 bg-linear-to-r from-teal-400 to-teal-500" />
 
       <div className="p-6">
         <div className="flex items-center justify-between  gap-1.5 text-xs text-gray-400 mb-4 flex-wrap">
@@ -105,7 +105,7 @@ const ViewThreadCard = ({ thread, userVoteType }: Props) => {
                 {thread.tags.map((tag) => (
                   <span
                     key={tag.name}
-                    className="flex items-center gap-1 text-xs font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 px-2.5 py-1 rounded-full transition-colors cursor-pointer"
+                    className="flex items-center gap-1 text-xs font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 px-2.5 py-1 rounded-full transition-colors cursor-pointer"
                   >
                     <Tag className="w-3 h-3" />
                     {tag.name}
@@ -116,7 +116,7 @@ const ViewThreadCard = ({ thread, userVoteType }: Props) => {
 
             <div className="flex items-center gap-4 pt-4 border-t border-gray-100 text-xs text-gray-400">
               <span className="flex items-center gap-1">
-                <ChevronUp className="w-3.5 h-3.5 text-orange-400" />
+                <ChevronUp className="w-3.5 h-3.5 text-teal-400" />
                 {thread.upvoteCount} {"upvotes"}
               </span>
               <span className="flex items-center gap-1">

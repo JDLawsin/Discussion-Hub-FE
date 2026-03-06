@@ -11,11 +11,11 @@ interface Props {
 
 const ProtocolCard = ({ hit }: Props) => (
   <Link href={`/protocol/${hit.id}`}>
-    <div className="bg-white border border-gray-200 rounded-xl hover:border-orange-200 hover:shadow-md transition-all duration-200 cursor-pointer group">
+    <div className="bg-white border border-gray-200 rounded-xl hover:border-teal-200 hover:shadow-md transition-all duration-200 cursor-pointer group">
       <div className="flex">
         <div className="flex-1 p-4">
           <div className="flex items-center gap-2 mb-2">
-            <span className="flex items-center gap-1 text-xs font-medium text-orange-500 bg-orange-50 px-2 py-0.5 rounded-full">
+            <span className="flex items-center gap-1 text-xs font-medium text-teal-500 bg-teal-50 px-2 py-0.5 rounded-full">
               <BookOpen className="w-3 h-3" />
               {"Protocol"}
             </span>
@@ -31,7 +31,7 @@ const ProtocolCard = ({ hit }: Props) => (
             </span>
           </div>
 
-          <h3 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors line-clamp-2">
+          <h3 className="text-base font-semibold text-gray-900 mb-2 group-hover:text-teal-600 transition-colors line-clamp-2">
             {hit.title}
           </h3>
 
@@ -45,7 +45,7 @@ const ProtocolCard = ({ hit }: Props) => (
                 <Badge
                   key={tag}
                   text={tag}
-                  className="flex items-center gap-1 text-xs text-gray-500! bg-gray-100! hover:bg-orange-50! hover:text-orange-500! px-2 py-0.5 rounded-full transition-colors cursor-pointer"
+                  className="flex items-center gap-1 text-xs text-gray-500! bg-gray-100! hover:bg-teal-50! hover:text-teal-500! px-2 py-0.5 rounded-full transition-colors cursor-pointer"
                 />
               ))}
             </div>

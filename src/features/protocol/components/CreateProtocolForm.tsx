@@ -100,7 +100,7 @@ const CreateProtocolForm = () => {
         >
           {"Cancel"}
         </button>
-        <FormButton className="flex items-center gap-2 px-6 py-2 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors cursor-pointer">
+        <FormButton className="flex items-center gap-2 px-6 py-2 text-sm font-semibold text-white bg-teal-500 hover:bg-teal-600 rounded-full transition-colors cursor-pointer">
           {"Publish Protocol"}
         </FormButton>
       </div>

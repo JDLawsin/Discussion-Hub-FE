@@ -82,8 +82,8 @@ const CommentItem = ({ comment, depth = 0, maxDepth, mutate }: Props) => {
                 disabled={isVoting || !isAuthenticated}
                 className={`flex items-center gap-0.5 px-1.5 py-0.5 rounded-full text-xs font-medium transition-colors ${
                   voteType === "upvote"
-                    ? "bg-orange-100 text-orange-600"
-                    : "text-gray-400 hover:text-orange-500 hover:bg-orange-50"
+                    ? "bg-teal-100 text-teal-600"
+                    : "text-gray-400 hover:text-teal-500 hover:bg-teal-50"
                 }`}
               >
                 <ChevronUp className="w-3.5 h-3.5" />
@@ -106,7 +106,7 @@ const CommentItem = ({ comment, depth = 0, maxDepth, mutate }: Props) => {
               {canReply && isAuthenticated && (
                 <button
                   onClick={() => toggle()}
-                  className="flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium text-gray-400 hover:text-orange-500 hover:bg-orange-50 transition-colors"
+                  className="flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium text-gray-400 hover:text-teal-500 hover:bg-teal-50 transition-colors"
                 >
                   <CornerDownRight className="w-3 h-3" />
                   {"Reply"}

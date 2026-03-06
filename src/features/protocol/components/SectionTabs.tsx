@@ -22,7 +22,7 @@ const SectionTabs = ({
           onClick={() => onSectionChange(section as Section)}
           className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold capitalize transition-all ${
             activeSection === section
-              ? "bg-white text-orange-500 shadow-sm"
+              ? "bg-white text-teal-500 shadow-sm"
               : "text-gray-500 hover:text-gray-700"
           }`}
         >
@@ -33,7 +33,7 @@ const SectionTabs = ({
           )}
           {section}
           <span
-            className={`text-xs px-1.5 py-0.5 rounded-full ${activeSection === section ? "bg-orange-100 text-orange-600" : "bg-gray-200 text-gray-500"}`}
+            className={`text-xs px-1.5 py-0.5 rounded-full ${activeSection === section ? "bg-teal-100 text-teal-600" : "bg-gray-200 text-gray-500"}`}
           >
             {section === "threads" ? threadsCount : reviewsCount}
           </span>

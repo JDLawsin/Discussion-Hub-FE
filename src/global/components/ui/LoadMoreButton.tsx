@@ -17,7 +17,7 @@ const LoadMoreButton = ({ onClick, loading, hasMore, label }: Props) => {
     <button
       onClick={onClick}
       disabled={loading}
-      className="w-full py-2.5 text-sm font-medium text-orange-500 bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-full py-2.5 text-sm font-medium text-teal-500 bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {loading ? (
         <span className="flex items-center justify-center gap-2">

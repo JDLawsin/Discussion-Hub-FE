@@ -73,7 +73,7 @@ const ReplyForm = ({ onToggle, mutate, commentParentId }: Props) => {
           >
             {"Cancel"}
           </button>
-          <FormButton className="flex items-center px-4 py-1.5 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors cursor-pointer">
+          <FormButton className="flex items-center px-4 py-1.5 text-sm font-semibold text-white bg-teal-500 hover:bg-teal-600 rounded-full transition-colors cursor-pointer">
             {"Reply"}
           </FormButton>
         </div>

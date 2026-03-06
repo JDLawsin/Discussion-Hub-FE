@@ -16,7 +16,7 @@ const ViewThreadContainer = ({ thread, userVoteType }: Props) => {
     <>
       <Link
         href={`/protocol/${thread.protocolId}`}
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-orange-500 transition-colors"
+        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-teal-500 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         {"Back to"}{" "}

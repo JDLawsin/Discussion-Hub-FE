@@ -31,7 +31,7 @@ const ReviewCard = ({ review, mutate }: Props) => {
       <div className="flex items-start gap-3">
         <Avatar
           name={review.author.name}
-          classname="text-orange-600! bg-orange-100!"
+          classname="text-teal-600! bg-teal-100!"
         />
         <div
           className={clsx("flex-1 min-w-0", !review.feedback && "self-center")}

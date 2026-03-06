@@ -13,7 +13,7 @@ const TypeSenseSearchBox = () => {
         value={query}
         onChange={(e) => refine(e.target.value)}
         placeholder="Search protocols, threads..."
-        className="w-full pl-10 pr-4 py-2.5 bg-gray-100 border border-transparent rounded-full text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-orange-300 focus:ring-2 focus:ring-orange-100 transition-all"
+        className="w-full pl-10 pr-4 py-2.5 bg-gray-100 border border-transparent rounded-full text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-teal-300 focus:ring-2 focus:ring-teal-100 transition-all"
       />
     </div>
   );

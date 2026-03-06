@@ -9,7 +9,7 @@ interface Props {
 const Avatar = ({ name, classname }: Props) => (
   <div
     className={clsx(
-      "w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-xs font-bold shrink-0",
+      "w-8 h-8 rounded-full bg-teal-500 flex items-center justify-center text-white text-xs font-bold shrink-0",
       classname,
     )}
   >

@@ -19,7 +19,7 @@ const TypeSenseSortBy = ({ activeTab }: { activeTab: string }) => {
         id="filter"
         value={currentRefinement}
         onChange={(e) => refine(e.target.value)}
-        className="appearance-none pl-3 pr-8 py-1.5 text-xs font-medium bg-white border border-gray-200 rounded-full text-gray-600 focus:outline-none focus:border-orange-300 cursor-pointer hover:border-gray-300 transition-colors"
+        className="appearance-none pl-3 pr-8 py-1.5 text-xs font-medium bg-white border border-gray-200 rounded-full text-gray-600 focus:outline-none focus:border-teal-300 cursor-pointer hover:border-gray-300 transition-colors"
       >
         {sortOptions.map((opt) => (
           <option key={opt.value} value={opt.value}>

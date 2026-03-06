@@ -9,7 +9,7 @@ interface Props {
 const Badge = ({ text, className }: Props) => (
   <span
     className={clsx(
-      "inline-flex items-center gap-1 text-xs font-medium text-orange-600 bg-orange-50 hover:bg-orange-100 px-2.5 py-1 rounded-full transition-colors cursor-pointer",
+      "inline-flex items-center gap-1 text-xs font-medium text-teal-600 bg-teal-50 hover:bg-teal-100 px-2.5 py-1 rounded-full transition-colors cursor-pointer",
       className,
     )}
   >

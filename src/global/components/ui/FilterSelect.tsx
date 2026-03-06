@@ -19,7 +19,7 @@ const FilterSelect = ({ activeTab, onChange }: Props) => {
           onClick={() => handleButtonClick(id as Tab)}
           className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all ${
             activeTab === id
-              ? "bg-white text-orange-500 shadow-sm"
+              ? "bg-white text-teal-500 shadow-sm"
               : "text-gray-500 hover:text-gray-700"
           }`}
         >

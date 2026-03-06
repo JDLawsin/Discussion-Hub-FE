@@ -53,8 +53,7 @@ const ConfirmDialog = ({
         <div
           className={clsx("h-1", {
             "bg-linear-to-r from-red-400 to-red-500": variant === "danger",
-            "bg-linear-to-r from-yellow-400 to-orange-400":
-              variant === "warning",
+            "bg-linear-to-r from-yellow-400 to-teal-400": variant === "warning",
           })}
         />
 

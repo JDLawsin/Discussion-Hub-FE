@@ -72,7 +72,7 @@ const ReviewSection = ({ hasReviewed }: Props) => {
         {isAuthenticated && !hasReviewed && (
           <button
             onClick={() => toggle()}
-            className="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors"
+            className="cursor-pointer flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-teal-500 hover:bg-teal-600 rounded-full transition-colors"
           >
             {!on ? (
               <Plus className="w-3.5 h-3.5" />
@@ -84,7 +84,7 @@ const ReviewSection = ({ hasReviewed }: Props) => {
         )}
 
         {isAuthenticated && hasReviewed && (
-          <span className="text-xs font-bold text-orange-500">
+          <span className="text-xs font-bold text-teal-500">
             {"You have already reviewed!"}
           </span>
         )}

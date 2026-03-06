@@ -33,7 +33,7 @@ const ViewProtocolCard = ({ data }: Props) => {
 
   return (
     <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-      <div className="h-1 bg-linear-to-r from-orange-400 to-orange-500" />
+      <div className="h-1 bg-linear-to-r from-teal-400 to-teal-500" />
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
           <Breadcrumb

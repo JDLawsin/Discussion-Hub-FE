@@ -29,8 +29,8 @@ const ThreadVoteSidebar = ({ thread, userVoteType }: Props) => {
         disabled={isVoting || !isAuthenticated}
         className={`p-1.5 rounded-full transition-colors ${
           voteType === "upvote"
-            ? "bg-orange-100 text-orange-500"
-            : "text-gray-400 hover:text-orange-500 hover:bg-orange-50"
+            ? "bg-teal-100 text-teal-500"
+            : "text-gray-400 hover:text-teal-500 hover:bg-teal-50"
         }`}
       >
         <ChevronUp className="w-5 h-5" />
@@ -38,7 +38,7 @@ const ThreadVoteSidebar = ({ thread, userVoteType }: Props) => {
       <span
         className={`text-sm font-bold min-w-8 text-center ${
           voteType === "upvote"
-            ? "text-orange-500"
+            ? "text-teal-500"
             : voteType === "downvote"
               ? "text-blue-500"
               : "text-gray-700"

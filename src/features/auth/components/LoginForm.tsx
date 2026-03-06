@@ -95,13 +95,13 @@ const LoginForm = () => {
         <div className="flex justify-end">
           <Link
             href="/forgot-password"
-            className="text-xs text-orange-500 hover:underline"
+            className="text-xs text-teal-500 hover:underline"
           >
             {"Forgot password?"}
           </Link>
         </div>
 
-        <FormButton className="flex w-full px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold rounded-md cursor-pointer transition-colors items-center justify-center">
+        <FormButton className="flex w-full px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white text-sm font-bold rounded-md cursor-pointer transition-colors items-center justify-center">
           {"Log in"}
         </FormButton>
       </form>

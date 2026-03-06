@@ -7,7 +7,7 @@ const BrowsePage = () => {
     <div className="page-container">
       <div>
         <h1 className="text-2xl font-bold text-gray-800">
-          {"Discover Discussion Hub"}
+          {"Discover Sanctum"}
         </h1>
         <span className="text-gray-600">
           {

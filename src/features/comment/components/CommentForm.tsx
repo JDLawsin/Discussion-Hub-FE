@@ -66,7 +66,7 @@ const CommentForm = ({ onToggle, mutate }: Props) => {
           error={errors?.comment}
         />
         <div className="flex justify-end mt-2">
-          <FormButton className="flex items-center px-4 py-1.5 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-full transition-colors cursor-pointer">
+          <FormButton className="flex items-center px-4 py-1.5 text-sm font-semibold text-white bg-teal-500 hover:bg-teal-600 rounded-full transition-colors cursor-pointer">
             {"Comment"}
           </FormButton>
         </div>

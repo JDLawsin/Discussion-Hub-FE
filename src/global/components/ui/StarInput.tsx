@@ -35,7 +35,7 @@ const StarInput = ({ value, max = 5, onChange }: Props) => {
           <Star
             className={`w-5 h-5 transition-colors ${
               isActive(star)
-                ? "fill-orange-400 text-orange-400"
+                ? "fill-teal-400 text-teal-400"
                 : "fill-gray-200 text-gray-200"
             }`}
           />

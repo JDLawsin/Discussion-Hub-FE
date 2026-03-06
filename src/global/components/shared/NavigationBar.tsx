@@ -9,11 +9,10 @@ import { toast } from "react-toastify";
 import Avatar from "../ui/Avatar";
 
 const allLinks = [
-  { href: "/browse", label: "Browse", icon: Compass, protected: false },
+  { href: "/browse", label: "Browse", protected: false },
   {
     href: "/create-discussion",
     label: "Create",
-    icon: PlusCircle,
     protected: true,
   },
 ];
@@ -52,7 +51,7 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
         <div className="px-6 md:px-16 lg:px-24 h-14 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-7 h-7 rounded-full bg-orange-500 flex items-center justify-center">
+            <div className="w-7 h-7 rounded-full bg-teal-500 flex items-center justify-center">
               <svg
                 className="w-4 h-4 text-white"
                 fill="currentColor"
@@ -62,13 +61,13 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
               </svg>
             </div>
             <span className="text-lg font-extrabold text-gray-900 tracking-tight">
-              {"Discussion Hub"}
+              {"Sanctum"}
             </span>
           </Link>
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-1">
-            {links.map(({ href, label, icon: Icon }) => {
+            {links.map(({ href, label }) => {
               const isActive = pathname === href;
               return (
                 <Link
@@ -77,11 +76,10 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
                   className={[
                     "flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-orange-50 text-orange-500"
+                      ? "bg-teal-50 text-teal-500"
                       : "text-gray-600 hover:text-gray-900 hover:bg-gray-100",
                   ].join(" ")}
                 >
-                  <Icon className="w-4 h-4" />
                   {label}
                 </Link>
               );
@@ -120,7 +118,7 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
                 {!isHomePage && !isAuthenticated && (
                   <Link
                     href="/"
-                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-orange-500 border border-orange-200 hover:bg-orange-50 rounded-md transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-teal-500 border border-teal-200 hover:bg-teal-50 rounded-md transition-colors"
                   >
                     <LogIn className="w-4 h-4" />
                     {"Log in"}
@@ -128,7 +126,7 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
                 )}
                 <Link
                   href="/register"
-                  className="px-3 py-1.5 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-md transition-colors"
+                  className="px-3 py-1.5 text-sm font-semibold text-white bg-teal-500 hover:bg-teal-600 rounded-md transition-colors"
                 >
                   {"Sign up"}
                 </Link>
@@ -153,7 +151,7 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
         {/* Mobile dropdown */}
         {menuOpen && (
           <div className="md:hidden border-t border-gray-100 bg-white px-4 py-3 flex flex-col gap-1">
-            {links.map(({ href, label, icon: Icon }) => {
+            {links.map(({ href, label }) => {
               const isActive = pathname === href;
               return (
                 <Link
@@ -163,11 +161,10 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
                   className={[
                     "flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors",
                     isActive
-                      ? "bg-orange-50 text-orange-500"
+                      ? "bg-teal-50 text-teal-500"
                       : "text-gray-700 hover:bg-gray-100",
                   ].join(" ")}
                 >
-                  <Icon className="w-4 h-4" />
                   {label}
                 </Link>
               );
@@ -205,7 +202,7 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
                     <Link
                       href="/"
                       onClick={() => setMenuOpen(false)}
-                      className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-orange-500 border border-orange-200 hover:bg-orange-50 rounded-md transition-colors"
+                      className="flex items-center gap-2 px-3 py-2 text-sm font-semibold text-teal-500 border border-teal-200 hover:bg-teal-50 rounded-md transition-colors"
                     >
                       <LogIn className="w-4 h-4" />
                       {"Log in"}
@@ -214,7 +211,7 @@ const NavigationBar = ({ isAuthenticated, user }: Props) => {
                   <Link
                     href="/register"
                     onClick={() => setMenuOpen(false)}
-                    className="px-3 py-2 text-sm font-semibold text-white bg-orange-500 hover:bg-orange-600 rounded-md transition-colors text-center"
+                    className="px-3 py-2 text-sm font-semibold text-white bg-teal-500 hover:bg-teal-600 rounded-md transition-colors text-center"
                   >
                     {"Sign up"}
                   </Link>
