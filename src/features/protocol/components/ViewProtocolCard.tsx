@@ -24,7 +24,6 @@ const ViewProtocolCard = ({ data }: Props) => {
 
   const handleDelete = async () => {
     try {
-      console.log(data.id);
       await deleteProtocol(data.id);
       router.push("/browse");
     } catch {

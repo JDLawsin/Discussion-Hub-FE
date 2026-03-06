@@ -5,6 +5,7 @@ export type ThreadSort = "recent" | "upvoted";
 
 export interface ThreadAuthor {
   name: string;
+  id: number;
 }
 
 export interface ThreadTag {
