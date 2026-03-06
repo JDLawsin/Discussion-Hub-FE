@@ -15,6 +15,9 @@ import {
 import ReplyForm from "./ReplyForm";
 import { useToggle } from "@reactuses/core";
 import { useAuth } from "@/features/auth/hooks/useAuth";
+import AuthorMenu from "@/global/components/ui/AuthorMenu";
+import { toast } from "react-toastify";
+import { deleteComment } from "../actions/actions";
 
 interface Props {
   comment: Comment;
@@ -25,7 +28,7 @@ interface Props {
 
 const CommentItem = ({ comment, depth = 0, maxDepth, mutate }: Props) => {
   const [on, toggle] = useToggle(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const [showReplies, setShowReplies] = useState(true);
 
   const { voteType, upvoteCount, downvoteCount, isVoting, vote } = useVote({
@@ -37,9 +40,18 @@ const CommentItem = ({ comment, depth = 0, maxDepth, mutate }: Props) => {
   });
 
   const hasReplies = comment.replies && comment.replies.length > 0;
-
   const canReply = maxDepth === undefined ? true : depth < maxDepth;
   const canRenderReplies = maxDepth === undefined ? true : depth < maxDepth;
+  const isAuthor = user?.id === comment.author.id;
+
+  const handleDelete = async () => {
+    try {
+      await deleteComment(comment.id);
+      mutate();
+    } catch {
+      toast.error("Failed to delete. Please try again.");
+    }
+  };
 
   return (
     <div
@@ -111,6 +123,22 @@ const CommentItem = ({ comment, depth = 0, maxDepth, mutate }: Props) => {
                     ? `Hide ${comment.replies!.length} ${comment.replies!.length === 1 ? "reply" : "replies"}`
                     : `Show ${comment.replies!.length} ${comment.replies!.length === 1 ? "reply" : "replies"}`}
                 </button>
+              )}
+
+              {isAuthor && (
+                <AuthorMenu
+                  size="sm"
+                  editAction={{
+                    type: "callback",
+                    onEdit: () => {},
+                  }}
+                  editLabel="Edit Comment"
+                  deleteTitle="Delete Comment"
+                  deleteDescription="This will permanently delete the comment. This action cannot be undone."
+                  deleteLabel="Delete"
+                  onDelete={handleDelete}
+                  isIconHorizontal={false}
+                />
               )}
             </div>
 

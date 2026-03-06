@@ -4,7 +4,6 @@ import { Review } from "../types/types";
 import Avatar from "@/global/components/ui/Avatar";
 import clsx from "clsx";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import { useRouter } from "next/navigation";
 import AuthorMenu from "@/global/components/ui/AuthorMenu";
 import { toast } from "react-toastify";
 import { deleteReview } from "../actions/actions";

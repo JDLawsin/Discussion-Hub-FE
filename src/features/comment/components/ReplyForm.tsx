@@ -16,7 +16,7 @@ interface Props {
 
 const ReplyForm = ({ onToggle, mutate, commentParentId }: Props) => {
   const { isAuthenticated } = useAuth();
-  const { id } = useParams();
+  const { threadId } = useParams();
   const [errors, setErrors] = useState<ErrorState<{ comment: "" }> | null>(
     null,
   );
@@ -25,7 +25,7 @@ const ReplyForm = ({ onToggle, mutate, commentParentId }: Props) => {
     try {
       setErrors(null);
 
-      const res = await submitComment(id, formData, commentParentId);
+      const res = await submitComment(threadId, formData, commentParentId);
 
       if (res && res.success) {
         mutate();

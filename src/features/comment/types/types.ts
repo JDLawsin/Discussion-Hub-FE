@@ -1,6 +1,6 @@
 export type Comment = {
   id: number;
-  author: { name: string };
+  author: { name: string; id: number };
   threadId: number;
   parentId: number | null;
   body: string;
