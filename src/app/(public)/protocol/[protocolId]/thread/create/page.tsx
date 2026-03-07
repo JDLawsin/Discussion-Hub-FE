@@ -36,7 +36,7 @@ const CreateThreadPage = async ({ params }: Props) => {
               <p className="text-xs text-gray-400 mt-2">
                 {"Posting a thread under "}
                 <Link
-                  href={`/protocols/${protocolId}`}
+                  href={`/protocol/${protocolId}`}
                   className="font-semibold text-teal-500 hover:underline"
                 >
                   {protocol.title}

@@ -1,11 +1,5 @@
 import { timeAgo } from "@/global/libs/dates";
-import {
-  BookOpen,
-  ChevronUp,
-  FileText,
-  MessageSquare,
-  Tag,
-} from "lucide-react";
+import { BookOpen, ChevronUp, FileText, MessageSquare } from "lucide-react";
 import { ThreadHit } from "../types/types";
 import Link from "next/link";
 import Badge from "@/global/components/ui/Badge";

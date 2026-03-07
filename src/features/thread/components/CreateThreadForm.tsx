@@ -31,10 +31,9 @@ const CreateThreadForm = ({ protocolId }: Props) => {
     try {
       setErrors(null);
 
-      formData.set("tags", tags.join(","));
       formData.set("protocolId", protocolId);
 
-      const res = await createThread(formData);
+      const res = await createThread(formData, tags);
 
       if (res && res.success) {
         toast.success("Created Successfully");

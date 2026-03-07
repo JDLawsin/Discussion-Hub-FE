@@ -4,10 +4,9 @@ import ApiRequestBuilder from "@/global/libs/axios";
 import { SuccessApiResponse } from "@/global/types";
 import { cookies } from "next/headers";
 
-export const createThread = async (formData: FormData) => {
+export const createThread = async (formData: FormData, tags: string[]) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("apiToken")?.value;
-  const tags = formData.get("tags") as string;
 
   try {
     if (token) {
@@ -22,12 +21,7 @@ export const createThread = async (formData: FormData) => {
         })
         .setData({
           ...Object.fromEntries(formData.entries()),
-          tags: tags
-            ? tags
-                .split(",")
-                .map((t) => t.trim())
-                .filter(Boolean)
-            : [],
+          tags: tags,
         })
         .send();
 
