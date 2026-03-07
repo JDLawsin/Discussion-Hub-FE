@@ -26,9 +26,7 @@ const CreateProtocolForm = () => {
     try {
       setErrors(null);
 
-      formData.set("tags", tags.join(","));
-
-      const res = await createProtocol(formData);
+      const res = await createProtocol(formData, tags);
 
       if (res && res.success) {
         toast.success("Created Successfully");
