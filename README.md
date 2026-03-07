@@ -34,7 +34,7 @@ Then fill in your values in `.env`:
 | `NEXT_PUBLIC_API_URL` | Laravel backend API base URL |
 | `NEXT_PUBLIC_TYPESENSE_HOST` | Typesense server host |
 | `NEXT_PUBLIC_TYPESENSE_PORT` | Typesense server port (default: `8108`) |
-| `NEXT_PUBLIC_TYPESENSE_PROTOCOL` | `http` (local) or `https` (production) |
+| `NEXT_PUBLIC_TYPESENSE_PROTOCOL` | `http` (local) or `https` (cloud) |
 | `NEXT_PUBLIC_TYPESENSE_SEARCH_ONLY_API_KEY` | **Search-only** key — safe to expose in browser |
 
 ### 3. Run the development server
