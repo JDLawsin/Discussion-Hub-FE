@@ -13,11 +13,12 @@ import { toast } from "react-toastify";
 
 interface Props {
   onToggle: () => void;
+  mutate: () => void;
 }
 
-const ReviewForm = ({ onToggle }: Props) => {
+const ReviewForm = ({ onToggle, mutate }: Props) => {
   const { isAuthenticated } = useAuth();
-  const { id } = useParams();
+  const { protocolId } = useParams();
   const [rating, setRating] = useState(5);
   const [errors, setErrors] = useState<ErrorState<ReviewFormSchema> | null>(
     null,
@@ -27,9 +28,10 @@ const ReviewForm = ({ onToggle }: Props) => {
     try {
       setErrors(null);
 
-      const res = await submitReview(id, formData);
+      const res = await submitReview(protocolId, formData);
 
       if (res && res.success) {
+        mutate();
         toast.success("Reviewed Successfully");
         onToggle();
       }

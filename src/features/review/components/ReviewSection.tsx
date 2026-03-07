@@ -90,7 +90,7 @@ const ReviewSection = ({ hasReviewed }: Props) => {
         )}
       </div>
 
-      {on && <ReviewForm onToggle={() => toggle()} />}
+      {on && <ReviewForm onToggle={() => toggle()} mutate={() => mutate()} />}
 
       <div className="bg-white border border-gray-200 rounded-xl p-4">
         <RatingSummary reviews={reviews} />
